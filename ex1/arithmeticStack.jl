@@ -32,10 +32,20 @@ function binaryOperator( operator, dstIo )
     incSp( dstIo )
 end
 
+function unaryOperator( operator, dstIo )
+    println( dstIo,"@SP")
+    println( dstIo,"A = M")
+    println( dstIo,"M = $operator M")
+end
+
 function compileLine( sline, dstIo )
     if(startswith(sline,"push"))
         push(sline, dstIo)
     elseif(startswith(sline,"add"))
         binaryOperator("+", dstIo)
+    elseif(startswith(sline,"sub"))
+        binaryOperator("-", dstIo)
+    elseif(startswith(sline,"neg"))
+        unaryOperator("-", dstIo)
     end
 end

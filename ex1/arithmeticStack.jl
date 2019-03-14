@@ -22,10 +22,10 @@ function push( sline, dstIo )
 end
 
 function binaryOperator( operator, dstIo )
+    decSp( dstIo )
     println( dstIo,"@SP")
     println( dstIo,"A = M")
     println( dstIo,"D = M")
-    decSp( dstIo )
     decSp( dstIo )
     println( dstIo,"A = M")
     println( dstIo,"M = M $operator D")
@@ -36,16 +36,4 @@ function unaryOperator( operator, dstIo )
     println( dstIo,"@SP")
     println( dstIo,"A = M")
     println( dstIo,"M = $operator M")
-end
-
-function compileLine( sline, dstIo )
-    if(startswith(sline,"push"))
-        push(sline, dstIo)
-    elseif(startswith(sline,"add"))
-        binaryOperator("+", dstIo)
-    elseif(startswith(sline,"sub"))
-        binaryOperator("-", dstIo)
-    elseif(startswith(sline,"neg"))
-        unaryOperator("-", dstIo)
-    end
 end

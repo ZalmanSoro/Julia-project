@@ -1,15 +1,14 @@
-
-function incSp()
+function incSp( dstIo )
     println( dstIo,"@SP")
     println( dstIo,"M = M + 1")
 end
 
-function decSp()
+function decSp( dstIo )
     println( dstIo,"@SP")
     println( dstIo,"M = M - 1")
 end
 
-function push(sline)
+function push( sline, dstIo )
     cells = split(sline," ")
     sagment = cells[2]
     if(sagment == "constant")
@@ -18,34 +17,25 @@ function push(sline)
         println( dstIo,"@SP")
         println( dstIo,"A = M")
         println( dstIo,"M = D")
-        incSp()
+        incSp( dstIo )
     end
 end
 
-function add()
+function binaryOperator( operator, dstIo )
     println( dstIo,"@SP")
     println( dstIo,"A = M")
     println( dstIo,"D = M")
-    decSp()
-    decSp()
+    decSp( dstIo )
+    decSp( dstIo )
     println( dstIo,"A = M")
-    println( dstIo,"M = M + D")
-    incSp()
+    println( dstIo,"M = M $operator D")
+    incSp( dstIo )
 end
 
-function compileLine(sline)
+function compileLine( sline, dstIo )
     if(startswith(sline,"push"))
-        push(sline)
+        push(sline, dstIo)
     elseif(startswith(sline,"add"))
-        add()
+        binaryOperator("+", dstIo)
     end
 end
-
-path = "C:/projects/ex1/StackArithmetic/SimpleAdd/"
-cd(path)
-file = "SimpleAdd.vm"
-asmFile = replace(file,Pair(".vm",".asm"))
-
-dstIo = open(asmFile,"w")
-foreach(compileLine,readlines(file))
-close(dstIo)

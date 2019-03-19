@@ -14,9 +14,9 @@ function push( sline, dstIo )
     if(sagment == "constant")
         println( dstIo,"@$(cells[3])")
         println( dstIo,"D = A")
-        println( dstIo,"@SP")
-        println( dstIo,"A = M")
-        println( dstIo,"M = D")
+        println( dstIo,"@SP")#A=0
+        println( dstIo,"A = M")#A=head(256....)
+        println( dstIo,"M = D")#RAM[256....] = D
         incSp( dstIo )
     end
 end

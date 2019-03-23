@@ -12,14 +12,22 @@ function compileLine( sline, dstIo )
         Arithmetic.binaryOperator("-", dstIo)
 #binary bit-wise operations
     elseif(startswith(sline,"and"))
-        Arithmetic.unaryOperator("&", dstIo)
+        Arithmetic.binaryOperator("&", dstIo)
     elseif(startswith(sline,"or"))
-        Arithmetic.unaryOperator("|", dstIo)
+        Arithmetic.binaryOperator("|", dstIo)
 #unary arithmetic operations
     elseif(startswith(sline,"neg"))
         Arithmetic.unaryOperator("-", dstIo)
-#unary logic operations                
+#unary logic operations
     elseif(startswith(sline,"not"))
         Arithmetic.unaryOperator("!", dstIo)
+#binary logic operations
+elseif(startswith(sline,"eq"))
+        Arithmetic.binaryLogicOperator("JEQ", dstIo)
+#it looks upside down but it is right, beacuse the order of variables in stack
+elseif(startswith(sline,"gt"))
+        Arithmetic.binaryLogicOperator("JLE", dstIo)
+elseif(startswith(sline,"lt"))
+        Arithmetic.binaryLogicOperator("JGE", dstIo)
     end
 end

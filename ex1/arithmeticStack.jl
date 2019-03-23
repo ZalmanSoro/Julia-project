@@ -33,7 +33,9 @@ function binaryOperator( operator, dstIo )
 end
 
 function unaryOperator( operator, dstIo )
+    decSp( dstIo )
     println( dstIo,"@SP")
     println( dstIo,"A = M")
     println( dstIo,"M = $operator M")
+    incSp( dstIo )
 end

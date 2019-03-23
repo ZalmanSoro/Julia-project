@@ -1,9 +1,9 @@
 module Compiler
     include("C:/workspace/julia-projects/julia-project/ex1/compiler.jl")
 end
-path = "C:/projects/ex1/StackArithmetic/SimpleAdd/"
+path = "C:/projects/ex1/StackArithmetic/StackTest/"
 cd(path)
-file = "SimpleAdd.vm"
+file = "StackTest.vm"
 asmFile = replace(file,Pair(".vm",".asm"))
 
 io = open(asmFile,"w")

@@ -8,9 +8,9 @@ M = M + 1
 @SP
 M = M - 1
 @SP
+A=M
 D=M
-D=M
-@THAT
+@THIS
 M=D
 @3040
 D = A
@@ -22,7 +22,7 @@ M = M + 1
 @SP
 M = M - 1
 @SP
-D=M
+A=M
 D=M
 @THAT
 M=D
@@ -64,7 +64,7 @@ A=A+1
 A=A+1
 A=A+1
 M=D
-@THAT
+@THIS
 D=M
 @SP
 A=M

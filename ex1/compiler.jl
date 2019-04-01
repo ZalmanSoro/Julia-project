@@ -4,9 +4,10 @@ end
 
 module memoryAccess
     include("memoryAccess.jl")
+end
 
-end  # module m
 function compileLine( sline, dstIo )
+#memory access operations
     if(startswith(sline,"push"))
         memoryAccess.push(sline, dstIo)
     elseif(startswith(sline,"pop"))

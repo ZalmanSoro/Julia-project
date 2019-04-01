@@ -74,7 +74,7 @@ function push( sline, destIo )
         if !(cells[3] in [0,1])
             throw("this value must be 1 or 0")
         =#
-        if cells[3] == 0
+        if cells[3] == "0"
             println(destIo,"@THIS") #A= this
         else
             println(destIo,"@THAT")#A=that
@@ -159,9 +159,9 @@ function pop( sline, destIo)
         =#
         decSp(destIo)
         println(destIo,"@SP")#A=SP
-        println(destIo,"D=M")#A=RAM[SP]
+        println(destIo,"A=M")#A=RAM[SP]
         println(destIo,"D=M")#D=RAM[RAM[SP]]
-        if cells[3] == 0
+        if cells[3] == "0"
             println(destIo,"@THIS")
         else
             println(destIo,"@THAT")

@@ -212,7 +212,7 @@ function pushStatic(cells,destIo)
     # the name of the stream is the full path,
     #so the program take the the sub string from the last '\' +1 (its return the index of the last '\' and we dont whont him)
     #and remove from the end of the string ".asm" then add the number of the local static (a.k.a cells[3])
-    println(destIo,"@$(destIo.name[findlast(isequal('\\'),destIo.name)+1:end-length(".asm>")]).$(cells[3])")#"@fileName.x"
+    println(destIo,"@$(destIo.name[findlast(x->x=='\\'||x=='/',destIo.name)+1:end-length(".asm>")]).$(cells[3])")#"@fileName.x" -in windows its "C:\\user\\..." in unix its "C/user/..."
     println(destIo ,"D=M")
     println(destIo,"@SP")#A=SP
     println(destIo,"A=M")#A=RAM[SP]
@@ -228,7 +228,7 @@ function popStatic(cells,destIo)
     # the name of the stream is the full path,
     #so the program take the the sub string from the last '\' +1 (its return the index of the last '\' and we dont whont him)
     #and remove from the end of the string ".asm" then add the number of the local static (a.k.a cells[3])
-    println(destIo,"@$(destIo.name[findlast(isequal('\\'),destIo.name)+1:end-length(".asm>")]).$(cells[3])")#"@fileName.x"
+    println(destIo,"@$(destIo.name[findlast(x->x=='\\'||x=='/',destIo.name)+1:end-length(".asm>")]).$(cells[3])")#"@fileName.x" -in windows its "C:\\user\\..." in unix its "C/user/..."
     println(destIo ,"M=D")
 end
 

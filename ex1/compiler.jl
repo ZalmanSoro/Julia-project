@@ -5,6 +5,9 @@ end
 module memoryAccess
     include("memoryAccess.jl")
 end
+module Control
+    include("controlFlow.jl")
+end  # module Control
 
 function compileLine( sline, dstIo )
 #memory access operations
@@ -36,5 +39,12 @@ function compileLine( sline, dstIo )
         Arithmetic.binaryLogicOperator("JLE", dstIo)
     elseif(startswith(sline,"lt"))
         Arithmetic.binaryLogicOperator("JGE", dstIo)
+#control flow
+    elseif(startswith(sline,"label"))
+        cells = split(sline, " ")
+        Control.label(cells[2], dstIo)
+    elseif(startswith(sline,"if-goto"))
+        cells = split(sline, " ")
+        Control.ifGoTo(cells[2], dstIo)
     end
 end

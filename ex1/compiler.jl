@@ -46,5 +46,8 @@ function compileLine( sline, dstIo )
     elseif(startswith(sline,"if-goto"))
         cells = split(sline, " ")
         Control.ifGoTo(cells[2], dstIo)
+    elseif(startswith(sline,"goto"))
+        cells = split(sline, " ")
+        Control.goTo(cells[2], dstIo)
     end
 end

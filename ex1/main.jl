@@ -8,7 +8,7 @@ module Compiler
     include("compiler.jl")
 end
 
-path = match(r".*julia-project",@__DIR__).match
+path = match(r".*Julia-project",@__DIR__).match
 for (r,d,f) in walkdir(joinpath(path,"Tests"))
     for file in f
         if endswith(file,".vm")

@@ -20,7 +20,15 @@ function pushConstant(cells,destIo)
     incSp( destIo)
 end
 
+function pushFromLable(source,destIo)
+    println( destIo,"@$source")
+    println( destIo,"D = M")
+    println( destIo,"@SP")#A=0
+    println( destIo,"A = M")#A=head(256....)
+    println( destIo,"M = D")#RAM[256....] = D
+    incSp( destIo)
 
+end
 
 #       local
 

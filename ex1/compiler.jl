@@ -5,9 +5,15 @@ end
 module memoryAccess
     include("memoryAccess.jl")
 end
+
 module Control
     include("controlFlow.jl")
-end  # module Control
+end
+
+module func
+    include("function.jl")
+
+end
 
 function compileLine( sline, dstIo )
 #memory access operations
@@ -49,5 +55,12 @@ function compileLine( sline, dstIo )
     elseif(startswith(sline,"goto"))
         cells = split(sline, " ")
         Control.goTo(cells[2], dstIo)
+#function
+    elseif(startswith(sline,"call"))
+        func.call(sline,dstIo)
+    elseif(startswith(sline,"function"))
+        func.compileFunction(sline,dstIo)
+    elseif(startswith(sline,"return"))
+        func.compileReturn(sline,dstIo)
     end
 end

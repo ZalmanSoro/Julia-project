@@ -1,0 +1,12 @@
+class Maze {
+	field Line line;
+	constructor Maze new(){
+		var int size;
+		let size = 32;
+		let line = Line.new(0,size,0,400);
+		let line = Line.new(64,size,112,512 -size);
+		let line = Line.new(128,size,0,400);
+		let line = Line.new(192,size,112,512 -size);
+		return this;
+	}
+}

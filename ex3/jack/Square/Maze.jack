@@ -1,12 +1,92 @@
 class Maze {
-	field Line line;
-	constructor Maze new(){
-		var int size;
+	field int size, len ,lines, squareSize;
+	constructor Maze new(int ss){
+		var int i;
+		var boolean even;
 		let size = 32;
-		let line = Line.new(0,size,0,400);
-		let line = Line.new(64,size,112,512 -size);
-		let line = Line.new(128,size,0,400);
-		let line = Line.new(192,size,112,512 -size);
+		let squareSize = ss;
+		let i = 0;
+		let len = 450;
+		let lines = 4;
+		let even = false; 
+		while(i < lines){
+			if(even){
+				do Screen.drawRectangle(0,2*i*size,len,(2*i + 1)*size);
+			}else{
+				do Screen.drawRectangle(512-len,2*i*size,511,(2*i + 1)*size);
+			}
+			let i = i + 1;
+			let even = ~even; 
+		}
 		return this;
 	}
+	
+	method boolean isPixelClear(int x, int y){
+		var int i,left,right,top,bottom,temp;
+		var boolean even;
+		let i = 0;
+		let even = false; 
+		while(i < 4){
+			let temp = (2*i + 1);
+			let top = 2*i*size;
+			let bottom = temp*size;
+			if(even){
+				let left = 0;
+				let right = len;
+				//do Output.printString("even");
+				//top left
+				if((x > left) & (x < right) & (y < bottom) & (y > top)){
+					do Output.printString("1st");
+					return false;
+				}
+				//top right
+				if((x + squareSize > left) & (x + squareSize < right) & (y < bottom) & (y > top)){
+				do Output.printString("2nd");
+					return false;
+				}
+				//bottom left
+				if((x  > left) & (x < right) & (y + squareSize < bottom) & (y + squareSize > top)){
+					do Output.printString("3rd");
+					return false;
+				}
+				//bottom right
+				if((x + squareSize > left) & (x + squareSize < right) & (y + squareSize < bottom) & (y + squareSize > top)){
+					do Output.printString("4th");
+					return false;
+				}
+			}else{
+				let left = 512-len;
+				let right = 511;			
+				//do Output.printString("odd");
+				//top left
+				if((x > left) & (x < right) & (y < bottom) & (y > top)){
+					do Output.printString("1st");
+					return false;
+				}
+				//top right
+				if((x + squareSize > left) & (x + squareSize < right) & (y < bottom) & (y > top)){
+				do Output.printString("2nd");
+					return false;
+				}
+				//bottom left
+				if((x  > left) & (x < right) & (y + squareSize < bottom) & (y + squareSize > top)){
+					do Output.printString("3rd");
+					return false;
+				}
+				//bottom right
+				if((x + squareSize > left) & (x + squareSize < right) & (y + squareSize < bottom) & (y + squareSize > top)){
+					do Output.printString("4th");
+					return false;
+				}
+			}
+			let i = i + 1;
+			let even = ~even; 
+		}
+		return true;
+	}
+	
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
 }

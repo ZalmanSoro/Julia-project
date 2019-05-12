@@ -22,9 +22,11 @@ class SquareGame {
     field int direction; // 0=none,1=up,2=down,3=left,4=right
 
     /** Constructs a new Square Game. */
-    constructor SquareGame new() {
-		let maze = Maze.new();
-        let square = Square.new(50, 50, 30);
+    constructor SquareGame new(){
+		var int squareSize;
+		let squareSize = 10;
+		let maze = Maze.new(squareSize);
+        let square = Square.new(0, 0, squareSize);
         let direction = 0;
 
         return this;
@@ -33,6 +35,7 @@ class SquareGame {
     /** Deallocates the object's memory. */
     method void dispose() {
         do square.dispose();
+		do maze.dispose();
         do Memory.deAlloc(this);
         return;
     }
@@ -86,20 +89,60 @@ class SquareGame {
 
     /** Moves the square by 2 in the current direction. */
     method void moveSquare() {
+		var int x,y;
         if (direction = 1) {
-            do square.moveUp();
+			let x = square.getX();	
+			let y = square.getY() - 1;
+			if(maze.isPixelClear(x,y)){
+				do square.moveUp();
+			}else{
+				do fail();
+			}			
         }
         if (direction = 2) {
-            do square.moveDown();
+			let x = square.getX();	
+			let y = square.getY() + 1;
+			if(maze.isPixelClear(x,y)){
+				do square.moveDown();
+			}else{
+				do fail();
+			}			
         }
         if (direction = 3) {
-            do square.moveLeft();
+			let x = square.getX() - 1;	
+			let y = square.getY();
+			if(maze.isPixelClear(x,y)){
+				do square.moveLeft();
+			}else{
+				do fail();
+			}			
         }
         if (direction = 4) {
-            do square.moveRight();
+			let x = square.getX() + 1;	
+			let y = square.getY();
+			if(maze.isPixelClear(x,y)){
+				do square.moveRight();
+			}else{
+				do fail();
+			}			
         }
 
         do Sys.wait(5); // Delays the next movement.
         return;
     }
+	
+	method void fail(){
+		let direction = 0;
+		
+		// do Screen.clearScreen();
+		// do Screen.drawCircle(256,128,10);
+		// do Screen.drawCircle(256,128,50);
+		// do Screen.drawCircle(256,128,100);
+		// do Screen.clearScreen();
+		 do Output.moveCursor(13,26);
+		 do Output.printString("Loser !!!");
+		// do Output.moveCursor(14,26);
+		// let direction = 0;
+		return;
+	}
 }

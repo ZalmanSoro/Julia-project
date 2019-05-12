@@ -1,7 +1,4 @@
-// This file is part of the materials accompanying the book 
-// "The Elements of Computing Systems" by Nisan and Schocken, 
-// MIT Press. Book site: www.idc.ac.il/tecs
-// File name: projects/09/Square/Main.jack
+
 
 /**
  * The Main class initializes a new Square Dance game and starts it.
@@ -11,7 +8,15 @@ class Main {
     /** Initializes a new game and starts it. */    
     function void main() {
         var SquareGame game;
-        let game = SquareGame.new();
+		var int level;
+		do Output.moveCursor(10,26);
+		do Output.printString("Hello, and welcom to the MAZE!!");
+		do Output.moveCursor(12,26);
+		do Output.printString("Please chose difficult level: 3 - Easy, 2 - Medium, 1 - Hard");
+		do Output.moveCursor(14,26);
+		let level = Keyboard.readInt("Enter a number: ");
+		do Screen.clearScreen();
+        let game = SquareGame.new(level);
         do game.run();
 		do game.dispose();
 

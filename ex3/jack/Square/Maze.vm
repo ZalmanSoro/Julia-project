@@ -126,6 +126,15 @@ push constant 0
 pop local 1
 push this 1
 pop local 2
+goto IF_END0
+label IF_FALSE0
+push constant 512
+push this 1
+sub
+pop local 1
+push constant 511
+pop local 2
+label IF_END0
 push argument 1
 push local 1
 gt
@@ -226,115 +235,6 @@ label IF_TRUE4
 push constant 0
 return
 label IF_FALSE4
-goto IF_END0
-label IF_FALSE0
-push constant 512
-push this 1
-sub
-pop local 1
-push constant 511
-pop local 2
-push argument 1
-push local 1
-gt
-push argument 1
-push local 2
-lt
-and
-push argument 2
-push local 4
-lt
-and
-push argument 2
-push local 3
-gt
-and
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
-push constant 0
-return
-label IF_FALSE5
-push argument 1
-push this 3
-add
-push local 1
-gt
-push argument 1
-push this 3
-add
-push local 2
-lt
-and
-push argument 2
-push local 4
-lt
-and
-push argument 2
-push local 3
-gt
-and
-if-goto IF_TRUE6
-goto IF_FALSE6
-label IF_TRUE6
-push constant 0
-return
-label IF_FALSE6
-push argument 1
-push local 1
-gt
-push argument 1
-push local 2
-lt
-and
-push argument 2
-push this 3
-add
-push local 4
-lt
-and
-push argument 2
-push this 3
-add
-push local 3
-gt
-and
-if-goto IF_TRUE7
-goto IF_FALSE7
-label IF_TRUE7
-push constant 0
-return
-label IF_FALSE7
-push argument 1
-push this 3
-add
-push local 1
-gt
-push argument 1
-push this 3
-add
-push local 2
-lt
-and
-push argument 2
-push this 3
-add
-push local 4
-lt
-and
-push argument 2
-push this 3
-add
-push local 3
-gt
-and
-if-goto IF_TRUE8
-goto IF_FALSE8
-label IF_TRUE8
-push constant 0
-return
-label IF_FALSE8
-label IF_END0
 push local 0
 push constant 1
 add

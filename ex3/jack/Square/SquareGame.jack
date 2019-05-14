@@ -23,6 +23,7 @@ class SquareGame {
     // The square's movement direction
     field int direction; // 0=none,1=up,2=down,3=left,4=right
 	field int stage;
+	field boolean gameOver;
     /** Constructs a new Square Game. */
     constructor SquareGame new(int l){
 		let stage = 1;
@@ -32,12 +33,18 @@ class SquareGame {
         let square = Square.new(0, 0, squareSize);
         let direction = 0;
 		let level = l*l*l;
+		let gameOver = false;
         return this;
     }
 
     /** Deallocates the object's memory. */
     method void dispose() {
-        do square.dispose();
+		do Screen.clearScreen();
+		do Output.moveCursor(13,26);
+		do Output.printString("bye bye!");
+		do Sys.wait(5000);
+		do Screen.clearScreen();
+		do square.dispose();
 		do maze.dispose();
         do Memory.deAlloc(this);
         return;
@@ -48,10 +55,9 @@ class SquareGame {
     method void run() {
         var char key;
         var boolean exit;
-
         let exit = false;
 
-        while (~exit) {
+        while (~exit & ~gameOver) {
             // waits for a key to be pressed.
             while (key = 0) {
                 let key = Keyboard.keyPressed();
@@ -60,12 +66,6 @@ class SquareGame {
 
             if (key = 81) {
                 let exit = true;
-            }
-            if (key = 90) {
-                do square.decSize();
-            }
-            if (key = 88) {
-                do square.incSize();
             }
             if (key = 131) {
                 let direction = 1;
@@ -86,6 +86,11 @@ class SquareGame {
                 do moveSquare();
             }
         }
+		if (gameOver){
+			while (~(key = 81)) {
+					let key = Keyboard.keyPressed();
+				}
+		}
             
         return;
 	}
@@ -161,6 +166,7 @@ class SquareGame {
 			do Screen.drawCircle(256,128,100);
 			do Output.moveCursor(12,28);
 			do Output.printString("You Lost!");
+			let gameOver = true;
 		}else{
 			do Output.moveCursor(13,26);
 			do Output.printString("Life remained : ");
@@ -174,6 +180,7 @@ class SquareGame {
 		do Screen.drawCircle(256,128,100);
 		do Output.moveCursor(12,28);
 		do Output.printString("You WON !!!");
+		let gameOver = true;
 		return;
 	}
 

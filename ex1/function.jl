@@ -10,7 +10,7 @@ funcDic=Dict{String,Integer}() #dictionary for function name and the number of t
 
 function compileFunction(sline,dstIo)
     cells= split(sline," ")
-    flow.label(cells[2],dstIo)
+    println(dstIo,"($(cells[2]))")
     num=parse(Int,cells[3])
     for i in 1:num
         memory.pushConstant([0,0,0],dstIo)
@@ -19,14 +19,14 @@ end
 
 function call(sline,dstIo)
     cells= split(sline," ")
-    fname="$(dstIo.name[findlast(x->x=='\\'||x=='/',dstIo.name)+1:end-length(".asm>")]).$(cells[2])" #the full name of the function - FileName.FunctaionName
+    fname="$(cells[2])" #the full name of the function - FileName.FunctaionName
     try
         funcDic[fname]+=1 #if fincDic[fname] exist - add  1 to its value
     catch
         funcDic[fname]=1 #else make him with the value 1
     end
     returnAddressLabel="$fname.return-address.$(funcDic[fname])"
-    memory.pushConstant(returnAddressLabel,dstIo)
+    memory.pushConstantString(returnAddressLabel,dstIo)
     memory.pushFromLable("LCL",dstIo)
     memory.pushFromLable("ARG",dstIo)
     memory.pushFromLable("THIS",dstIo)
@@ -44,8 +44,8 @@ function call(sline,dstIo)
     println(dstIo,"D=M")
     println(dstIo,"@LCL")
     println(dstIo,"M=D")
-    flow.goTo(returnAddressLabel,dstIo)
-    flow.label("$(cells[2]).return-address.$(funcDic[fname])",dstIo)#functionName.return-address.numberOfCall
+    flow.goTo(fname,dstIo)
+    println(dstIo,"($(cells[2]).return-address.$(funcDic[fname]))")#functionName.return-address.numberOfCall
 end
 
 function restore(arg,dstIo)

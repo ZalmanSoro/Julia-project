@@ -15,7 +15,7 @@ module func
 
 end
 
-function compileLine( sline, dstIo )
+function compileLine( sline, dstIo ,file)
 #memory access operations
     if(startswith(sline,"push"))
         memoryAccess.push(sline, dstIo)
@@ -48,13 +48,13 @@ function compileLine( sline, dstIo )
 #control flow
     elseif(startswith(sline,"label"))
         cells = split(sline, " ")
-        Control.label(cells[2], dstIo)
+        Control.label(cells[2], dstIo,file)
     elseif(startswith(sline,"if-goto"))
         cells = split(sline, " ")
         Control.ifGoTo(cells[2], dstIo)
     elseif(startswith(sline,"goto"))
         cells = split(sline, " ")
-        Control.goTo(cells[2], dstIo)
+        Control.goTo(cells[2], dstIo,file)
 #function
     elseif(startswith(sline,"call"))
         func.call(sline,dstIo)
@@ -62,5 +62,5 @@ function compileLine( sline, dstIo )
         func.compileFunction(sline,dstIo)
     elseif(startswith(sline,"return"))
         func.compileReturn(sline,dstIo)
+        end
     end
-end

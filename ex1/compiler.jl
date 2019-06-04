@@ -17,6 +17,7 @@ end
 
 function compileLine( sline, dstIo ,file)
 #memory access operations
+    println(dstIo,"// $sline")
     if(startswith(sline,"push"))
         memoryAccess.push(sline, dstIo)
     elseif(startswith(sline,"pop"))

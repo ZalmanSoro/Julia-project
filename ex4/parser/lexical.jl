@@ -7,7 +7,7 @@ using PEG
 #lexical elements
     @rule grammar = terms[*]
     @rule terms = comment,keyword,symbol,integerConstant,string,identifier,space
-    @rule comment = r"(\/\/)+(.*)\n",r"\/[*]((.)*(\s)*)*[*]\/"
+    @rule comment = r"(\/\/)+(.*)\n",r"\/[*]([\S\s]*)[*]\/"
     @rule  keyword = "class"|> K , "constructor" |> K , "function" |> K , "method" |> K , "field" |> K , "static" |> K ,
         "var" |> K , "int" |> K , "char" |> K , "boolean" |> K , "void" |> K , "true" |> K , "false" |> K , "null" |> K , "this" |> K ,
         "let" |> K , "do" |> K , "if" |> K , "else" |> K , "while" |> K|> K , "return" |> K

@@ -29,3 +29,9 @@ function linkToParent(parent,child)
     link!(parent,child)
     return parent
 end
+
+function saveNewDoc(f,d)
+    p = XMLDocument()
+    setroot!(p,d)
+    save(f,p)
+end

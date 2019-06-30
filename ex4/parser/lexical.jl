@@ -15,7 +15,7 @@ using PEG
     @rule integerConstant = r"\d+" |> INT
     @rule string = r"\"(\\.|[^\"])*\"" |> STRING
     @rule identifier = r"[a-zA-Z_]+[a-zA-Z_0-9]*" |> IDENTIFIER
-    @rule space = " " ,"\n","\r"
+    @rule space = r"[\s]*" |> w -> return "space"
 #handlers
 K = w -> return addChild("keyword"," $w ")
 S = w -> return addChild("symbol"," $w ")
@@ -26,4 +26,4 @@ function INT(w)
     return addChild("integerConstant"," $w ")
 end
 STRING = w -> return addChild("stringConstant"," $(SubString(w, 2:length(w)-1)) ")
-IDENTIFIER = w -> return addChild("identifier"," $w ")
+IDENTIFIER = w -> return addChild("identifier", " $w ")

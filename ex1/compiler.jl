@@ -43,9 +43,9 @@ function compileLine( sline, dstIo ,file)
         Arithmetic.binaryLogicOperator("JEQ", dstIo)
 #it looks upside down but it is right, beacuse the order of variables in stack
     elseif(startswith(sline,"gt"))
-        Arithmetic.binaryLogicOperator("JLE", dstIo)
+        Arithmetic.binaryLogicOperator("JLT", dstIo)
     elseif(startswith(sline,"lt"))
-        Arithmetic.binaryLogicOperator("JGE", dstIo)
+        Arithmetic.binaryLogicOperator("JGT", dstIo)
 #control flow
     elseif(startswith(sline,"label"))
         cells = split(sline, " ")

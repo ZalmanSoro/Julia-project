@@ -4,7 +4,7 @@ end  # module Arithmetic
 
 
 function label(labelName, dstIo,file)
-    println(dstIo, "($(file[1:end-3]).$labelName)")#"(fileName.x)" -in windows its "C:\\user\\..." in unix its "C/user/..."
+    println(dstIo, "($labelName)")#"(fileName.x)" -in windows its "C:\\user\\..." in unix its "C/user/..."
 end
 
 function goTo(labelName,dstIo)
@@ -14,7 +14,7 @@ end
 
 
 function goTo(labelName,dstIo,file)
-    println(dstIo,"@$(file[1:end-3]).$labelName")#"@fileName.x" -in windows its "C:\\user\\..." in unix its "C/user/..."
+    println(dstIo,"@$labelName")#"@fileName.x" -in windows its "C:\\user\\..." in unix its "C/user/..."
     println(dstIo,"0;JMP")
 end
 

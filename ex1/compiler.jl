@@ -55,7 +55,7 @@ function compileLine( sline, dstIo ,file)
         Control.ifGoTo(cells[2], dstIo)
     elseif(startswith(sline,"goto"))
         cells = split(sline, " ")
-        Control.goTo(cells[2], dstIo,file)
+        Control.goTo(cells[2], dstIo)
 #function
     elseif(startswith(sline,"call"))
         func.call(sline,dstIo)

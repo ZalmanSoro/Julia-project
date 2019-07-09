@@ -226,11 +226,11 @@ end
 
 #       static
 
-function pushStatic(cells,destIo)
+function pushStatic(cells,destIo,file)
     # the name of the stream is the full path,
     #so the program take the the sub string from the last '\' +1 (its return the index of the last '\' and we dont whont him)
     #and remove from the end of the string ".asm" then add the number of the local static (a.k.a cells[3])
-    println(destIo,"@$(destIo.name[findlast(x->x=='\\'||x=='/',destIo.name)+1:end-length(".asm>")]).$(cells[3])")#"@fileName.x" -in windows its "C:\\user\\..." in unix its "C/user/..."
+    println(destIo,"@$(file[1:end-length(".vm")]).$(cells[3])")#"@fileName.x" -in windows its "C:\\user\\..." in unix its "C/user/..."
     println(destIo ,"D=M")
     println(destIo,"@SP")#A=SP
     println(destIo,"A=M")#A=RAM[SP]
@@ -238,7 +238,7 @@ function pushStatic(cells,destIo)
     incSp(destIo)
 end
 
-function popStatic(cells,destIo)
+function popStatic(cells,destIo,file)
     decSp(destIo)
     println(destIo,"@SP")
     println(destIo,"A=M")
@@ -246,13 +246,13 @@ function popStatic(cells,destIo)
     # the name of the stream is the full path,
     #so the program take the the sub string from the last '\' +1 (its return the index of the last '\' and we dont whont him)
     #and remove from the end of the string ".asm" then add the number of the local static (a.k.a cells[3])
-    println(destIo,"@$(destIo.name[findlast(x->x=='\\'||x=='/',destIo.name)+1:end-length(".asm>")]).$(cells[3])")#"@fileName.x" -in windows its "C:\\user\\..." in unix its "C/user/..."
+    println(destIo,"@$(file[1:end-length(".vm")]).$(cells[3])")#"@fileName.x" -in windows its "C:\\user\\..." in unix its "C/user/..."
     println(destIo ,"M=D")
 end
 
 
 
-function push( sline, destIo )
+function push( sline, destIo, file )
     cells = split(sline," ")
     sagment = cells[2]
     if sagment == "constant"
@@ -270,11 +270,11 @@ function push( sline, destIo )
     elseif sagment == "pointer" # push pointer x
         pushPointer(cells,destIo)
     elseif sagment == "static" #push static x
-        pushStatic(cells,destIo)
+        pushStatic(cells,destIo,file)
     end
 end
 
-function pop( sline, destIo)
+function pop( sline, destIo, file)
     cells= split(sline," ")
     sagment = cells[2]
     if sagment == "local"
@@ -290,7 +290,7 @@ function pop( sline, destIo)
     elseif sagment == "pointer" #pop pointer x
         popPointer(cells,destIo)
     elseif sagment == "static"# pop statsic x
-        popStatic(cells,destIo)
+        popStatic(cells,destIo, file)
     end
 
 end

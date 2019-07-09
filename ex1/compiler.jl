@@ -19,9 +19,9 @@ function compileLine( sline, dstIo ,file)
 #memory access operations
     println(dstIo,"// $sline")
     if(startswith(sline,"push"))
-        memoryAccess.push(sline, dstIo)
+        memoryAccess.push(sline, dstIo,file)
     elseif(startswith(sline,"pop"))
-        memoryAccess.pop(sline, dstIo)
+        memoryAccess.pop(sline, dstIo,file)
 #binary arithmetic operations
     elseif(startswith(sline,"add"))
         Arithmetic.binaryOperator("+", dstIo)
